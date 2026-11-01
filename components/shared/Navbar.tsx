@@ -84,16 +84,16 @@ function Navbar() {
             <LogIn data-icon="inline-end" />
             Sign in
           </Link>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            aria-label={open ? "Close menu" : "Open menu"}
-            aria-expanded={open}
-            onClick={() => setOpen((value) => !value)}
-          >
-            {open ? <X /> : <Menu />}
-          </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              aria-label={open ? "Close menu" : "Open menu"}
+              aria-expanded={open}
+              onClick={() => setOpen((value) => !value)}
+            >
+              {open ? <X /> : <Menu />}
+            </Button>
         </div>
       </div>
 
