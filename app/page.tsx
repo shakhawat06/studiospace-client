@@ -1,9 +1,12 @@
 import CategoryCard from "@/components/home/CategoryCard"
 import FeatureCard from "@/components/home/FeatureCard"
 import Slider from "@/components/home/Slider"
+import { IData } from "./types/type"
+import HowBookingWorks from "@/components/home/HowBookingWorks"
+import HostGuarantee from "@/components/home/HostGuarantee"
 
 export default function Page() {
-  const datas = [
+  const datas : IData[] = [
     {
       id: "studio-1",
       title: "Creative Photography Studio",
@@ -73,17 +76,23 @@ export default function Page() {
       <div className="mx-auto flex flex-col gap-4 text-sm leading-loose">
         <Slider />
 
-        <div className="grid w-full grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 sm:gap-5">
           {datas.map((data) => (
             <FeatureCard key={data.id} data={data} />
           ))}
         </div>
 
-        <div className="grid grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 mt-10">
           {categories.map((category, index) => (
             <CategoryCard key={index} category={category} />
           ))}
         </div>
+
+        <div className="">
+          <HowBookingWorks />
+        </div>
+
+        <HostGuarantee />
       </div>
     </div>
   )
