@@ -6,24 +6,17 @@ import { MapPin, Star, ArrowUpRight, Clock } from "lucide-react"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
+import { IData } from "@/app/types/type"
 
-interface IData {
-  id: string,
-      title: string,
-      image: string,
-      category: string,
-      hourlyRate: number,
-      ratingBadge: string,
-      location: string, 
+interface dataProps {
+  data: IData
 }
 
-const FeatureCard = ({ data } : { data: IData}) => {
+const FeatureCard = ({ data } : dataProps) => {
   const { title, image, category, hourlyRate, ratingBadge, location } = data
 
   return (
     <div>
-      <h2>Features</h2>
-
       <Card className="group mx-auto w-80 max-w-sm overflow-hidden border border-gray-200 bg-white p-0 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl dark:border-gray-800 dark:bg-gray-950">
         {/* Image */}
         <div className="relative aspect-16/10 overflow-hidden">
