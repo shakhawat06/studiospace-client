@@ -130,19 +130,3 @@
   }
 }
 
-/* Hero slider (Swiper) customizations — kept unlayered so they win over Swiper's own CSS */
-.slider-swiper .swiper-pagination-bullet {
-  width: 0.5rem;
-  height: 0.5rem;
-  background-color: rgb(255 255 255 / 0.5);
-  opacity: 1;
-  transition:
-    width 0.3s ease,
-    background-color 0.3s ease;
-}
-
-.slider-swiper .swiper-pagination-bullet-active {
-  width: 1.75rem;
-  border-radius: 9999px;
-  background-color: rgb(255 255 255);
-}

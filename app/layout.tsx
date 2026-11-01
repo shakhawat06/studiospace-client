@@ -3,6 +3,7 @@ import { Geist_Mono, Inter, Oxanium } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
+import { ToastContainer } from "react-toastify"
 import { Navbar } from "@/components/shared/Navbar"
 
 const oxaniumHeading = Oxanium({
@@ -38,6 +39,7 @@ export default function RootLayout({
         <ThemeProvider>
           <Navbar />
           <div className="">{children}</div>
+          <ToastContainer />
         </ThemeProvider>
       </body>
     </html>
