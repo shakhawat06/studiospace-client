@@ -1,10 +1,12 @@
 import { Geist_Mono, Inter, Oxanium } from "next/font/google"
 
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
+import { Providers } from "@/components/theme-provider"
+import type { ReactNode } from "react"
 import { cn } from "@/lib/utils"
 import { ToastContainer } from "react-toastify"
 import { Navbar } from "@/components/shared/Navbar"
+import Footer from "@/components/shared/Footer"
 
 const oxaniumHeading = Oxanium({
   subsets: ["latin"],
@@ -20,9 +22,7 @@ const fontMono = Geist_Mono({
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: { children: ReactNode }) {
   return (
     <html
       lang="en"
@@ -36,11 +36,12 @@ export default function RootLayout({
       )}
     >
       <body>
-        <ThemeProvider>
+        <Providers>
           <Navbar />
           <div className="">{children}</div>
+          <Footer />
           <ToastContainer />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   )
