@@ -10,6 +10,8 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
+
+
 const menuItems = [
   { label: "Home", href: "/" },
   { label: "Explore Studios", href: "/studios" },
@@ -22,7 +24,7 @@ function Navbar() {
   const [open, setOpen] = React.useState(false)
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md `supports-[backdrop-filter]:bg-background/60`">
+    <header className="`supports-[backdrop-filter]:bg-background/60` sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md">
       <div className="mx-auto grid h-16 max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 sm:px-6 md:grid-cols-[1fr_auto_1fr]">
         {/* Logo — left side */}
         <Link
@@ -54,7 +56,7 @@ function Navbar() {
                 className={cn(
                   "rounded-md px-3 py-1.5 text-sm font-medium transition-colors hover:text-[#E47131]",
                   isActive
-                    ? "text-[#E47131] font-bold"
+                    ? "font-bold text-[#E47131]"
                     : "text-muted-foreground"
                 )}
               >
@@ -84,16 +86,21 @@ function Navbar() {
             <LogIn data-icon="inline-end" />
             Sign in
           </Link>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              aria-label={open ? "Close menu" : "Open menu"}
-              aria-expanded={open}
-              onClick={() => setOpen((value) => !value)}
-            >
-              {open ? <X /> : <Menu />}
-            </Button>
+
+
+
+
+
+          <Button
+            variant="ghost"
+            size="icon"
+            className="md:hidden"
+            aria-label={open ? "Close menu" : "Open menu"}
+            aria-expanded={open}
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X /> : <Menu />}
+          </Button>
         </div>
       </div>
 
