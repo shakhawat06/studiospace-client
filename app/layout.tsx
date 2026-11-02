@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils"
 import { ToastContainer } from "react-toastify"
 import { Navbar } from "@/components/shared/Navbar"
 import Footer from "@/components/shared/Footer"
-import { Navmenu } from "@/components/shared/Navmenu"
 
 const oxaniumHeading = Oxanium({
   subsets: ["latin"],
@@ -21,9 +20,7 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
-export default function RootLayout({
-  children,
-}: { children: ReactNode }) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
@@ -39,10 +36,20 @@ export default function RootLayout({
       <body>
         <Providers>
           <Navbar />
-          {/* <Navmenu /> */}
           <div className="">{children}</div>
           <Footer />
-          <ToastContainer />
+          <ToastContainer
+            position="bottom-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="dark"
+          />
         </Providers>
       </body>
     </html>
