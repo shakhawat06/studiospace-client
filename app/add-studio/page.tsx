@@ -8,8 +8,6 @@ const AddStudioPage = () => {
     }
   return (
     <div className='py-5'>
-      add studio
-
       <AddStudioForm user = {user}/>
     </div>
   )
