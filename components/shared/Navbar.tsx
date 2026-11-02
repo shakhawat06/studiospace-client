@@ -10,7 +10,21 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
-
+import { LogOutIcon } from "lucide-react"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  LuCircleUser,
+  LuCross,
+  LuLayoutDashboard,
+  LuLayoutPanelTop,
+  LuList,
+} from "react-icons/lu"
 
 const menuItems = [
   { label: "Home", href: "/" },
@@ -87,9 +101,49 @@ function Navbar() {
             Sign in
           </Link>
 
-
-
-
+          {/* dropdown menu */}
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              render={
+                <Button variant="outline">
+                  <LuCircleUser />
+                </Button>
+              }
+            />
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                <Link href="" className="flex items-center gap-2">
+                  <LuLayoutDashboard />
+                  Dashboard
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/add-studio" className="flex items-center gap-2">
+                  <LuCross />
+                  Add New Studio
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="" className="flex items-center gap-2">
+                  <LuList />
+                  My Studio Listings
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="" className="flex items-center gap-2">
+                  <LuLayoutPanelTop />
+                  My Bookings
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem variant="destructive">
+                <Link href="" className="flex items-center gap-2">
+                  <LogOutIcon />
+                  Log out
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <Button
             variant="ghost"
