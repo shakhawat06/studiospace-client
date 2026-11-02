@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 import { ToastContainer } from "react-toastify"
 import { Navbar } from "@/components/shared/Navbar"
 import Footer from "@/components/shared/Footer"
+import { Navmenu } from "@/components/shared/Navmenu"
 
 const oxaniumHeading = Oxanium({
   subsets: ["latin"],
@@ -38,6 +39,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Navbar />
+          {/* <Navmenu /> */}
           <div className="">{children}</div>
           <Footer />
           <ToastContainer />
