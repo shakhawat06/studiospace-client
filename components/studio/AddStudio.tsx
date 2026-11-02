@@ -1,16 +1,14 @@
 
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import type { FormEvent } from "react";
 import {
   FiMapPin,
   FiImage,
   FiDollarSign,
   FiUsers,
-  FiHome,
   FiCheckCircle,
-  FiUser,
   FiPlus,
 } from "react-icons/fi";
 
@@ -25,6 +23,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { toast } from "react-toastify";
+import { redirect } from "next/navigation";
 
 const categories = [
   "Photo Studio",
@@ -201,10 +201,26 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
       // });
       //
       // if (!response.ok) {
-      //   throw new Error("Failed to create studio.");
-      // }
+      //   throw 
+      
+      const res= await fetch('http://localhost:8000/add-studio', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+      })
 
-      console.log("Studio form is valid:", payload);
+      const data  = await res.json();
+      console.log(data);
+
+      toast.success('Studio add successfully')
+
+      if(data.acknowledged == true) {
+        redirect('/')
+      }
+
+      
+
+      // console.log("Studio form is valid:", payload);
 
     } catch (err) {
       setError(
@@ -218,7 +234,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
   };
 
   return (
-    <div className="mx-auto w-full max-w-5xl">
+    <div className="mx-auto w-full max-w-5xl px-10 md:px-0 xl:px-0">
       {/* Page Header */}
       <div className="mb-8">
         <div className="mb-3 flex size-12 items-center justify-center rounded-xl bg-[#E47131]/10 text-[#E47131]">
@@ -269,7 +285,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
 
             <Select
               value={formData.category}
-              onValueChange={(value) => updateField("category", value)}
+              onValueChange={(value) => updateField("category", value as string)}
               required
             >
               <SelectTrigger id="category" className="h-11">
