@@ -13,7 +13,8 @@ import {
 } from "react-icons/fi"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { LuPenLine, LuTrash2 } from "react-icons/lu"
+import { LuTrash2 } from "react-icons/lu"
+import EditStudio from "./EditStudio"
 
 export type Studio = {
   _id: string
@@ -51,9 +52,9 @@ export default function StudioDetails({ studio }: StudioDetailsProps) {
             <FiArrowLeft />
             Back to studios
           </Link>
-          <div className="space-x-3">
-            <Link href="#"><Button variant="outline"><LuPenLine />Edit</Button></Link>
-            <Link href="#"><Button variant="destructive"><LuTrash2 />Delete</Button></Link>
+          <div className="space-x-3 flex">
+            <EditStudio studio={studio} />
+            <Link href="#"><Button className="cursor-pointer" variant="destructive"><LuTrash2 />Delete</Button></Link>
           </div>
         </div>
 
