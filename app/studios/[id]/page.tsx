@@ -20,9 +20,6 @@ const StudioDetailPage = async ({ params }: PageProps) => {
 
   const studio = await res.json();
 
-  console.log(studio);
-  
-
   return (
     <div>
       <StudioDetails studio={studio} />
