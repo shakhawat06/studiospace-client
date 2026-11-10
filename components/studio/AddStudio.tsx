@@ -1,8 +1,7 @@
+"use client"
 
-"use client";
-
-import React, { useState } from "react";
-import type { FormEvent } from "react";
+import React, { useState } from "react"
+import type { FormEvent } from "react"
 import {
   FiMapPin,
   FiImage,
@@ -10,21 +9,21 @@ import {
   FiUsers,
   FiCheckCircle,
   FiPlus,
-} from "react-icons/fi";
+} from "react-icons/fi"
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { toast } from "react-toastify";
-import { redirect } from "next/navigation";
+} from "@/components/ui/select"
+import { toast } from "react-toastify"
+import { redirect } from "next/navigation"
 
 const categories = [
   "Photo Studio",
@@ -36,7 +35,7 @@ const categories = [
   "Art Studio",
   "Dance Studio",
   "Other",
-];
+]
 
 const availableAmenities = [
   "Wi-Fi",
@@ -51,26 +50,26 @@ const availableAmenities = [
   "Makeup Room",
   "Changing Room",
   "Wheelchair Accessible",
-];
+]
 
 type AddStudioFormProps = {
   user: {
-    name: string;
-    email: string;
-  };
-};
+    name: string
+    email: string
+  }
+}
 
 type StudioFormData = {
-  title: string;
-  category: string;
-  hourlyRate: string;
-  securityDeposit: string;
-  maxCapacity: string;
-  location: string;
-  imageURL: string;
-  amenities: string[];
-  overview: string;
-};
+  title: string
+  category: string
+  hourlyRate: string
+  securityDeposit: string
+  maxCapacity: string
+  location: string
+  imageURL: string
+  amenities: string[]
+  overview: string
+}
 
 const initialForm: StudioFormData = {
   title: "",
@@ -82,22 +81,19 @@ const initialForm: StudioFormData = {
   imageURL: "",
   amenities: [],
   overview: "",
-};
+}
 
 export default function AddStudioForm({ user }: AddStudioFormProps) {
-  const [formData, setFormData] = useState<StudioFormData>(initialForm);
-  const [error, setError] = useState("");
-  const [submitting, setSubmitting] = useState(false);
+  const [formData, setFormData] = useState<StudioFormData>(initialForm)
+  const [error, setError] = useState("")
+  const [submitting, setSubmitting] = useState(false)
 
-  const updateField = (
-    field: keyof StudioFormData,
-    value: string
-  ) => {
+  const updateField = (field: keyof StudioFormData, value: string) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
-    }));
-  };
+    }))
+  }
 
   const toggleAmenity = (amenity: string) => {
     setFormData((prev) => ({
@@ -105,75 +101,66 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
       amenities: prev.amenities.includes(amenity)
         ? prev.amenities.filter((item) => item !== amenity)
         : [...prev.amenities, amenity],
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setError("");
+    e.preventDefault()
+    setError("")
 
-    const hourlyRate = Number(formData.hourlyRate);
-    const securityDeposit = Number(formData.securityDeposit);
-    const maxCapacity = Number(formData.maxCapacity);
+    const hourlyRate = Number(formData.hourlyRate)
+    const securityDeposit = Number(formData.securityDeposit)
+    const maxCapacity = Number(formData.maxCapacity)
 
     if (!formData.title.trim()) {
-      setError("Please enter a studio title.");
-      return;
+      setError("Please enter a studio title.")
+      return
     }
 
     if (!formData.category) {
-      setError("Please select a studio category.");
-      return;
+      setError("Please select a studio category.")
+      return
     }
 
-    if (
-      !Number.isFinite(hourlyRate) ||
-      hourlyRate <= 0
-    ) {
-      setError("Hourly rate must be greater than $0.");
-      return;
+    if (!Number.isFinite(hourlyRate) || hourlyRate <= 0) {
+      setError("Hourly rate must be greater than $0.")
+      return
     }
 
-    if (
-      !Number.isFinite(securityDeposit) ||
-      securityDeposit < 0
-    ) {
-      setError("Security deposit cannot be negative.");
-      return;
+    if (!Number.isFinite(securityDeposit) || securityDeposit < 0) {
+      setError("Security deposit cannot be negative.")
+      return
     }
 
-    if (
-      !Number.isInteger(maxCapacity) ||
-      maxCapacity < 1
-    ) {
-      setError("Maximum capacity must be at least 1.");
-      return;
+    if (!Number.isInteger(maxCapacity) || maxCapacity < 1) {
+      setError("Maximum capacity must be at least 1.")
+      return
     }
 
     if (!formData.location.trim()) {
-      setError("Please enter the studio location.");
-      return;
+      setError("Please enter the studio location.")
+      return
     }
 
     if (formData.imageURL.trim()) {
       try {
-        const url = new URL(formData.imageURL.trim());
+        const url = new URL(formData.imageURL.trim())
         if (!["http:", "https:"].includes(url.protocol)) {
-          throw new Error("Invalid URL");
+          throw new Error("Invalid URL")
         }
       } catch {
-        setError("Please enter a valid HTTP or HTTPS image URL.");
-        return;
+        setError("Please enter a valid HTTP or HTTPS image URL.")
+        return
       }
     }
 
     if (formData.overview.trim().length < 20) {
-      setError("Overview must be at least 20 characters.");
-      return;
+      setError("Overview must be at least 20 characters.")
+      return
     }
 
     try {
-      setSubmitting(true);
+      setSubmitting(true)
 
       const payload = {
         ...formData,
@@ -190,48 +177,30 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
           name: user.name,
           email: user.email,
         },
-      };
-
-      // TODO: Send payload to your protected API route.
-      // Example:
-      // const response = await fetch("/api/studios", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(payload),
-      // });
-      //
-      // if (!response.ok) {
-      //   throw 
-      
-      const res= await fetch('http://localhost:8000/add-studio', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(payload)
-      })
-
-      const data  = await res.json();
-      console.log(data);
-
-      toast.success('Studio add successfully')
-
-      if(data.acknowledged == true) {
-        redirect('/')
       }
 
-      
+      const res = await fetch("http://localhost:8000/add-studio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await res.json()
+      console.log(data)
+
+      toast.success("Studio add successfully")
+
+      if (data.acknowledged == true) {
+        redirect("/")
+      }
 
       // console.log("Studio form is valid:", payload);
-
     } catch (err) {
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong."
-      );
+      setError(err instanceof Error ? err.message : "Something went wrong.")
     } finally {
-      setSubmitting(false);
+      setSubmitting(false)
     }
-  };
+  }
 
   return (
     <div className="mx-auto w-full max-w-5xl px-10 md:px-0 xl:px-0">
@@ -257,9 +226,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
         {/* Studio Information */}
         <section className="space-y-5">
           <div>
-            <h2 className="text-lg font-semibold">
-              Studio Information
-            </h2>
+            <h2 className="text-lg font-semibold">Studio Information</h2>
             <p className="text-sm text-muted-foreground">
               Add the basic details of your studio.
             </p>
@@ -285,7 +252,9 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
 
             <Select
               value={formData.category}
-              onValueChange={(value) => updateField("category", value as string)}
+              onValueChange={(value) =>
+                updateField("category", value as string)
+              }
               required
             >
               <SelectTrigger id="category" className="h-11">
@@ -308,7 +277,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
               <Label htmlFor="hourlyRate">Hourly Rate ($) *</Label>
 
               <div className="relative">
-                <FiDollarSign className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <FiDollarSign className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="hourlyRate"
                   type="number"
@@ -316,9 +285,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
                   step="0.01"
                   placeholder="50.00"
                   value={formData.hourlyRate}
-                  onChange={(e) =>
-                    updateField("hourlyRate", e.target.value)
-                  }
+                  onChange={(e) => updateField("hourlyRate", e.target.value)}
                   className="h-11 pl-9"
                   required
                 />
@@ -326,12 +293,10 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="securityDeposit">
-                Security Deposit ($) *
-              </Label>
+              <Label htmlFor="securityDeposit">Security Deposit ($) *</Label>
 
               <div className="relative">
-                <FiDollarSign className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <FiDollarSign className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="securityDeposit"
                   type="number"
@@ -348,12 +313,10 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="maxCapacity">
-                Max Capacity *
-              </Label>
+              <Label htmlFor="maxCapacity">Max Capacity *</Label>
 
               <div className="relative">
-                <FiUsers className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                <FiUsers className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
                 <Input
                   id="maxCapacity"
                   type="number"
@@ -361,9 +324,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
                   step="1"
                   placeholder="10"
                   value={formData.maxCapacity}
-                  onChange={(e) =>
-                    updateField("maxCapacity", e.target.value)
-                  }
+                  onChange={(e) => updateField("maxCapacity", e.target.value)}
                   className="h-11 pl-9"
                   required
                 />
@@ -376,7 +337,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
             <Label htmlFor="location">Location / Address *</Label>
 
             <div className="relative">
-              <FiMapPin className="absolute left-3 top-3 size-4 text-muted-foreground" />
+              <FiMapPin className="absolute top-3 left-3 size-4 text-muted-foreground" />
               <Input
                 id="location"
                 placeholder="Street, area, city, postal code"
@@ -394,7 +355,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
             <Label htmlFor="imageURL">Studio Image URL</Label>
 
             <div className="relative">
-              <FiImage className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+              <FiImage className="absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 id="imageURL"
                 type="url"
@@ -424,8 +385,8 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
 
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {availableAmenities.map((amenity) => {
-              const checked = formData.amenities.includes(amenity);
-              const id = `amenity-${amenity.replace(/\W+/g, "-")}`;
+              const checked = formData.amenities.includes(amenity)
+              const id = `amenity-${amenity.replace(/\W+/g, "-")}`
 
               return (
                 <label
@@ -451,7 +412,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
                     <FiCheckCircle className="size-4 text-[#E47131]" />
                   )}
                 </label>
-              );
+              )
             })}
           </div>
 
@@ -528,8 +489,8 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
           </div>
 
           <p className="text-xs text-muted-foreground">
-            Owner information is displayed for reference. Your
-            authenticated account should determine studio ownership.
+            Owner information is displayed for reference. Your authenticated
+            account should determine studio ownership.
           </p>
         </section>
 
@@ -550,8 +511,8 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
             variant="outline"
             disabled={submitting}
             onClick={() => {
-              setFormData(initialForm);
-              setError("");
+              setFormData(initialForm)
+              setError("")
             }}
           >
             Reset Form
@@ -567,5 +528,5 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
         </div>
       </form>
     </div>
-  );
+  )
 }
