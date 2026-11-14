@@ -13,23 +13,9 @@ import {
 } from "react-icons/fi"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
-import { LuTrash2 } from "react-icons/lu"
 import EditStudio from "./EditStudio"
-
-export type Studio = {
-  _id: string
-  title: string
-  category: string
-  location: string
-  imageURL: string
-  hourlyRate: number
-  securityDeposit?: number
-  maxCapacity: number
-  rating: number
-  reviews: number
-  amenities: string[]
-  overview?: string
-}
+import { Studio } from "@/app/types/type"
+import { DeleteStudioDialog } from "./DeleteStudioDialog"
 
 type StudioDetailsProps = {
   studio: Studio
@@ -54,7 +40,7 @@ export default function StudioDetails({ studio }: StudioDetailsProps) {
           </Link>
           <div className="space-x-3 flex">
             <EditStudio studio={studio} />
-            <Link href="#"><Button className="cursor-pointer" variant="destructive"><LuTrash2 />Delete</Button></Link>
+            <DeleteStudioDialog studio={studio} />
           </div>
         </div>
 
@@ -105,7 +91,7 @@ export default function StudioDetails({ studio }: StudioDetailsProps) {
           {/* Left Content */}
           <div className="space-y-10 lg:col-span-2">
             {/* Quick Information */}
-            <section className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+            <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-2">
               <div className="rounded-xl border bg-card p-4">
                 <FiUsers className="mb-3 text-2xl text-[#E47131]" />
                 <p className="text-sm text-muted-foreground">
@@ -122,13 +108,12 @@ export default function StudioDetails({ studio }: StudioDetailsProps) {
                 <h3 className="mt-1 text-lg font-bold">Hourly</h3>
               </div>
 
-              <div className="col-span-2 rounded-xl border bg-card p-4 sm:col-span-1">
+              {/* <div className="col-span-2 rounded-xl border bg-card p-4 sm:col-span-1">
                 <FiStar className="mb-3 text-2xl text-[#E47131]" />
                 <p className="text-sm text-muted-foreground">Guest rating</p>
                 <h3 className="mt-1 text-lg font-bold">
-                  {/* {studio.rating.toFixed(1)} / 5 */}
                 </h3>
-              </div>
+              </div> */}
             </section>
 
             {/* Overview */}
@@ -226,7 +211,7 @@ export default function StudioDetails({ studio }: StudioDetailsProps) {
                 </div>
               </div>
 
-              {/* //** Boking button here   */}
+               {/*? Boking button here   */}
               {/* Booking CTA */}
               <div className="pt-5">
                 <Button className="h-12 w-full rounded-xl bg-[#E47131] text-base font-semibold text-white hover:bg-[#cb6026]">
