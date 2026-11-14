@@ -16,7 +16,7 @@ export type Studio = {
   imageURL: string
   hourlyRate: number
   securityDeposit?: number
-  capacity: number
+  maxCapacity: number
   rating: number
   reviews: number
   amenities: string[]
