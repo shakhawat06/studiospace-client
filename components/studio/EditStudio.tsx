@@ -10,7 +10,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { FieldGroup } from "@/components/ui/field"
 import { LuPenLine } from "react-icons/lu"
 
 import React, { useState } from "react"
@@ -35,8 +34,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { toast } from "react-toastify"
-import { redirect } from "next/navigation"
 import { Studio } from "@/app/types/type"
+import { redirect, useRouter } from "next/navigation"
 
 const categories = [
   "Photo Studio",
@@ -86,6 +85,8 @@ const EditStudio = ({ studio }: StudioDetailsProps) => {
   const [formData, setFormData] = useState<StudioFormData>(studio)
   const [error, setError] = useState("")
   const [submitting, setSubmitting] = useState(false)
+
+  const router = useRouter()
 
   const updateField = (field: keyof StudioFormData, value: string) => {
     setFormData((prev) => ({
@@ -172,25 +173,20 @@ const EditStudio = ({ studio }: StudioDetailsProps) => {
         maxCapacity,
       }
 
-    //   const { _id, updatedData } = payload\
-
-    // FIXME: Error on update studio
       const res = await fetch(`http://localhost:8000/studio/${studio._id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(payload),
       })
 
       const data = await res.json()
       console.log(data)
-
-      toast.success("Studio add successfully")
-
-    //   if (data.acknowledged == true) {
-    //     redirect("/")
-    //   }
-
-      // console.log("Studio form is valid:", payload);
+      if (data.acknowledged == true) {
+        toast.success("Studio add successfully")
+        // redirect('/studios')
+        router.push("/studios")
+        router.refresh()
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.")
     } finally {
