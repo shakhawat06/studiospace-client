@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -17,26 +17,50 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { authClient } from "@/lib/auth-client"
+import Image from "next/image"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 
-export default function LoginForm() {
-
+export default function SignUpForm() {
   const handleEmailSignUp = async (e: React.SubmitEvent<HTMLElement>) => {
     e.preventDefault()
 
     const formData = new FormData(e.target)
-    const user = Object.fromEntries(formData.entries())
-    console.log(user);
-    const {data, error} = await authClient.signUp.email({
-      ...user
-    })
-    
+    const user = Object.fromEntries(formData.entries()) as {
+      name: string
+      image: string
+      email: string
+      password: string
+    }
 
+    const { data, error } = await authClient.signUp.email({
+      ...user,
+    })
+
+    if (data) {
+      redirect('/')
+    }
+    if (error) {
+      console.log(error)
+    }
   }
 
   return (
-    <div className="flex flex-col gap-6 max-w-md mx-auto my-20">
+    <div className="mx-auto my-20 flex max-w-md flex-col gap-6">
       <Card>
+        <Link
+          href="/"
+          className="flex items-center justify-center text-2xl font-bold tracking-tight"
+        >
+          <Image
+            src="/image/logo/onlyLogo.png"
+            className="mr-3"
+            alt="logo"
+            width={30}
+            height={30}
+          />
+          Studio<span className="text-[#E47131]">Space</span>
+        </Link>
         <CardHeader className="text-center">
           <CardTitle className="text-xl">Welcome back</CardTitle>
           <CardDescription>
