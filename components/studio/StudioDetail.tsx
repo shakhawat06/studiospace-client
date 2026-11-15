@@ -1,21 +1,18 @@
 import Link from "next/link"
 import {
   FiMapPin,
-  FiStar,
   FiUsers,
   FiClock,
-  FiShield,
   FiCheckCircle,
   FiArrowLeft,
-  FiArrowUpRight,
   FiHeart,
   FiCamera,
 } from "react-icons/fi"
-import { Button } from "@/components/ui/button"
 import Image from "next/image"
 import EditStudio from "./EditStudio"
 import { Studio } from "@/app/types/type"
 import { DeleteStudioDialog } from "./DeleteStudioDialog"
+import BookingCard from "../booking/BookingCard"
 
 type StudioDetailsProps = {
   studio: Studio
@@ -168,82 +165,7 @@ export default function StudioDetails({ studio }: StudioDetailsProps) {
           </div>
 
           {/* Booking Sidebar */}
-          <aside className="lg:col-span-1">
-            <div className="sticky top-24 rounded-2xl border bg-card p-5 shadow-sm sm:p-6">
-              <div className="flex items-end justify-between border-b pb-5">
-                <div>
-                  <span className="text-sm text-muted-foreground">
-                    Starting from
-                  </span>
-                  <h2 className="mt-1 text-3xl font-bold">
-                    ${studio.hourlyRate}
-                    <span className="text-base font-normal text-muted-foreground">
-                      {" "}
-                      / hour
-                    </span>
-                  </h2>
-                </div>
-              </div>
-
-              {/* Price Details */}
-              <div className="space-y-4 border-b py-5">
-                <div className="flex justify-between gap-3 text-sm">
-                  <span className="text-muted-foreground">
-                    Hourly rental rate
-                  </span>
-                  <span className="font-semibold">${studio.hourlyRate}</span>
-                </div>
-
-                <div className="flex justify-between gap-3 text-sm">
-                  <span className="text-muted-foreground">
-                    Security deposit
-                  </span>
-                  <span className="font-semibold">
-                    ${studio.securityDeposit ?? 0}
-                  </span>
-                </div>
-
-                <div className="flex justify-between gap-3 text-sm">
-                  <span className="text-muted-foreground">Capacity</span>
-                  <span className="font-semibold">
-                    {studio.maxCapacity} Guests
-                  </span>
-                </div>
-              </div>
-
-               {/*? Boking button here   */}
-              {/* Booking CTA */}
-              <div className="pt-5">
-                <Button className="h-12 w-full rounded-xl bg-[#E47131] text-base font-semibold text-white hover:bg-[#cb6026]">
-                  <Link
-                    className="flex items-center"
-                    href={`/studios/${studio._id}/book`}
-                  >
-                    Book This Studio
-                    <FiArrowUpRight className="ml-2" />
-                  </Link>
-                </Button>
-
-                <p className="mt-3 text-center text-xs text-muted-foreground">
-                  Booking details and availability are subject to confirmation.
-                </p>
-              </div>
-
-              {/* Trust Information */}
-              <div className="mt-6 rounded-xl bg-muted/60 p-4">
-                <div className="flex items-start gap-3">
-                  <FiShield className="mt-0.5 shrink-0 text-xl text-[#E47131]" />
-                  <div>
-                    <h4 className="text-sm font-semibold">Secure Booking</h4>
-                    <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                      Review your booking details before confirming your
-                      reservation.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </aside>
+          <BookingCard studio={studio} />
         </div>
       </div>
     </main>
