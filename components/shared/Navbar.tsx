@@ -10,21 +10,8 @@ import { Button, buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 
-import { LogOutIcon } from "lucide-react"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import {
-  LuCircleUser,
-  LuCross,
-  LuLayoutDashboard,
-  LuLayoutPanelTop,
-  LuList,
-} from "react-icons/lu"
+import UserDropdownNavbar from "./UserDropdownNavbar"
+import { authClient } from "@/lib/auth-client"
 
 const menuItems = [
   { label: "Home", href: "/" },
@@ -36,6 +23,9 @@ const menuItems = [
 function Navbar() {
   const pathname = usePathname()
   const [open, setOpen] = React.useState(false)
+
+  const { data: session } = authClient.useSession()
+  const user = session?.user
 
   return (
     <header className="`supports-[backdrop-filter]:bg-background/60` sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md">
@@ -83,67 +73,31 @@ function Navbar() {
         {/* Actions — right side */}
         <div className="flex items-center justify-end gap-1.5 justify-self-end">
           <ThemeToggle />
-          <Link
-            href="/signup"
-            className={cn(
-              buttonVariants({ variant: "outline" }),
-              "hidden sm:inline-flex"
-            )}
-          >
-            <UserPlus data-icon="inline-end" />
-            Sign up
-          </Link>
-          <Link
-            href="/signin"
-            className={buttonVariants({ variant: "default" })}
-          >
-            <LogIn data-icon="inline-end" />
-            Sign in
-          </Link>
 
           {/* dropdown menu */}
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              render={
-                <Button variant="outline">
-                  <LuCircleUser />
-                </Button>
-              }
-            />
-            <DropdownMenuContent>
-              <DropdownMenuItem>
-                <Link href="" className="flex items-center gap-2">
-                  <LuLayoutDashboard />
-                  Dashboard
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="/add-studio" className="flex items-center gap-2">
-                  <LuCross />
-                  Add New Studio
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="" className="flex items-center gap-2">
-                  <LuList />
-                  My Studio Listings
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Link href="" className="flex items-center gap-2">
-                  <LuLayoutPanelTop />
-                  My Bookings
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem variant="destructive">
-                <Link href="" className="flex items-center gap-2">
-                  <LogOutIcon />
-                  Log out
-                </Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {user ? (
+            <UserDropdownNavbar />
+          ) : (
+            <>
+              <Link
+                href="/signup"
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "hidden sm:inline-flex"
+                )}
+              >
+                <UserPlus data-icon="inline-end" />
+                Sign up
+              </Link>
+              <Link
+                href="/signin"
+                className={buttonVariants({ variant: "default" })}
+              >
+                <LogIn data-icon="inline-end" />
+                Sign in
+              </Link>
+            </>
+          )}
 
           <Button
             variant="ghost"
