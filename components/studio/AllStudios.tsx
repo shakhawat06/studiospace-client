@@ -61,13 +61,13 @@ export default function AllStudios({ studio }: { studio: Studio }) {
             </div>
 
             <div className="text-right">
-              <p className="items-center justify-end gap-1.5 text-sm font-medium">
+              <div className="items-center justify-end gap-1.5 text-sm font-medium">
                 <p className="text-xs text-muted-foreground mb-1">Starting from</p>
                 <div className="flex items-center gap-3">
                   <FiUsers className="text-muted-foreground" />
                   {studio.maxCapacity} Guests
                 </div>
-              </p>
+              </div>
             </div>
           </div>
 
