@@ -17,7 +17,6 @@ import { LuCross, LuLayoutDashboard, LuLayoutPanelTop } from "react-icons/lu"
 const UserDropdownNavbar = () => {
   const { data: session } = authClient.useSession()
   const user = session?.user
-  console.log(user)
 
   const handleSignOut = () => {
     authClient.signOut()

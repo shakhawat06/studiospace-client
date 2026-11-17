@@ -4,14 +4,12 @@ import { Studio } from "../types/type"
 
 const StudiosPage = async () => {
   const res = await fetch("http://localhost:8000/studios")
-  const studios : Studio[] = await res.json()
-
-  console.log(studios)
+  const studios: Studio[] = await res.json()
 
   return (
     <div className="mx-auto min-h-svh max-w-7xl p-6">
       {/* Hero */}
-      <div className="border-b bg-muted/30 mb-10">
+      <div className="mb-10 border-b bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-20">
           <div className="mx-auto max-w-3xl text-center">
             <span className="mb-4 inline-flex items-center gap-2 rounded-full border bg-background px-4 py-2 text-sm font-medium text-[#E47131]">
@@ -35,12 +33,10 @@ const StudiosPage = async () => {
       </div>
 
       {studios.length > 0 ? (
-        <div className="">
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full">
-            {studios.map((studio) => (
-              <AllStudios key={studio._id} studio={studio} />
-            ))}
-          </div>
+        <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {studios.map((studio) => (
+            <AllStudios key={studio._id} studio={studio} />
+          ))}
         </div>
       ) : (
         <div className="rounded-2xl border border-dashed px-5 py-16 text-center">

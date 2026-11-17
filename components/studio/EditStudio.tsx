@@ -35,7 +35,7 @@ import {
 } from "@/components/ui/select"
 import { toast } from "react-toastify"
 import { Studio } from "@/app/types/type"
-import { redirect, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 
 const categories = [
   "Photo Studio",
@@ -82,7 +82,18 @@ type StudioDetailsProps = {
 }
 
 const EditStudio = ({ studio }: StudioDetailsProps) => {
-  const [formData, setFormData] = useState<StudioFormData>(studio)
+  const [formData, setFormData] = useState<StudioFormData>({
+  _id: studio._id,
+  title: studio.title,
+  category: studio.category,
+  hourlyRate: String(studio.hourlyRate),
+  securityDeposit: String(studio.securityDeposit ?? 0),
+  maxCapacity: String(studio.maxCapacity ?? studio.maxCapacity),
+  location: studio.location,
+  imageURL: studio.imageURL,
+  amenities: studio.amenities ?? [],
+  overview: studio.overview ?? "",
+});
   const [error, setError] = useState("")
   const [submitting, setSubmitting] = useState(false)
 
@@ -183,7 +194,6 @@ const EditStudio = ({ studio }: StudioDetailsProps) => {
       console.log(data)
       if (data.acknowledged == true) {
         toast.success("Studio add successfully")
-        // redirect('/studios')
         router.push("/studios")
         router.refresh()
       }

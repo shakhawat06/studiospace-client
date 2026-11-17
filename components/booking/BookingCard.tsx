@@ -4,8 +4,10 @@ import { Button } from "@base-ui/react"
 import { FiArrowUpRight, FiShield, FiCalendar } from "react-icons/fi"
 import { useState } from "react"
 import { authClient } from "@/lib/auth-client"
+import { Studio } from "@/app/types/type"
+import { toast } from "react-toastify"
 
-const BookingCard = ({ studio }) => {
+const BookingCard = ({ studio }: { studio: Studio}) => {
   const [bookingDate, setBookingDate] = useState("")
 
   const today = new Date().toISOString().split("T")[0]
@@ -13,7 +15,7 @@ const BookingCard = ({ studio }) => {
   const { data: session } = authClient.useSession()
   const user = session?.user
 
-  const handleBooking = async (e) => {
+  const handleBooking = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     console.log(bookingDate)
@@ -33,8 +35,9 @@ const BookingCard = ({ studio }) => {
       body: JSON.stringify(data)
     })
     const bookingRes = await res.json()
-    console.log(bookingRes);
-    
+    if(bookingRes.acknowledged === true) {
+      toast.success('Studio added successfully')
+    }
   }
 
   return (
@@ -102,7 +105,7 @@ const BookingCard = ({ studio }) => {
                 className="mt-5 cursor-pointer flex h-12 w-full items-center justify-center rounded-xl bg-[#E47131] text-base font-semibold text-white hover:bg-[#cb6026]"
                 disabled={!bookingDate}
               >
-                Book This Studio
+                Book Studio Now
                 <FiArrowUpRight className="ml-2" />
               </Button>
             </form>

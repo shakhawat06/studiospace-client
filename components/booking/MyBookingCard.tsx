@@ -1,3 +1,5 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import {
@@ -5,20 +7,37 @@ import {
   FiMapPin,
   FiUsers,
   FiArrowUpRight,
-  FiDollarSign,
   FiShield,
-  FiTrash,
   FiTrash2,
 } from "react-icons/fi"
 import type { Booking } from "@/app/types/type"
 import { Button } from "@/components/ui/button"
+import { useRouter } from "next/navigation"
+import { toast } from "react-toastify"
 
 const BookingCard = ({ booking }: { booking: Booking }) => {
+  const router = useRouter()
+
+  const handleDeleteBooking = async () => {
+    const res = await fetch(
+      `http://localhost:8000/my-bookings/${booking._id}`,
+      {
+        method: "DELETE",
+      }
+    )
+    const data = await res.json()
+    console.log(data)
+    if (data.acknowledged == true) {
+      router.refresh()
+      toast.success('Booking delete successfully')
+    }
+  }
+
   return (
     <div className="overflow-hidden rounded-2xl border bg-card shadow-sm transition hover:shadow-md">
       <div className="grid md:grid-cols-[280px_1fr]">
         {/* Studio Image */}
-        <div className="relative min-h-[220px] md:min-h-full">
+        <div className="relative min-h-[220] md:min-h-full">
           <Image
             src={booking.imageURL}
             alt={booking.title}
@@ -122,18 +141,25 @@ const BookingCard = ({ booking }: { booking: Booking }) => {
             </div>
 
             <div className="flex justify-end gap-3">
-              <Button variant="destructive" className='py-3'>
+              <Button
+                onClick={handleDeleteBooking}
+                variant="destructive"
+                className="cursor-pointer"
+              >
                 Cancle Booking
                 <FiTrash2 />
               </Button>
+              {/* <DeleteStudioDialog booking={booking} /> */}
 
-              <Link
-                href={`/studios/${booking._id}`}
-                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl bg-[#E47131] px-4 text-sm font-semibold text-white transition hover:bg-[#cb6026]"
-              >
-                View Studio
-                <FiArrowUpRight />
-              </Link>
+              <Button>
+                <Link
+                  href={`/studios/${booking._id}`}
+                  className="flex items-center gap-2"
+                >
+                  View Studio
+                  <FiArrowUpRight />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

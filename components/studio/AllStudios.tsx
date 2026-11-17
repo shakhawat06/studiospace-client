@@ -6,7 +6,7 @@ import { Studio } from "@/app/types/type"
 
 export default function AllStudios({ studio }: { studio: Studio }) {
   return (
-    <section className="min-h-screen bg-background">
+    <section className="">
       <article
         key={studio._id}
         className="group overflow-hidden rounded-2xl border bg-card transition duration-300 hover:-translate-y-1 hover:shadow-xl"
@@ -69,18 +69,6 @@ export default function AllStudios({ studio }: { studio: Studio }) {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Amenities */}
-          <div className="mt-4 flex flex-wrap gap-2">
-            {studio.amenities.slice(0, 3).map((amenity) => (
-              <span
-                key={amenity}
-                className="rounded-md bg-muted px-2.5 py-1.5 text-xs text-muted-foreground"
-              >
-                {amenity}
-              </span>
-            ))}
           </div>
 
           {/* Details CTA */}

@@ -16,7 +16,6 @@ export default function LoginForm() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // TODO: Connect your authentication logic here.
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");

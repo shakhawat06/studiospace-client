@@ -23,7 +23,8 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { toast } from "react-toastify"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
+import { authClient } from "@/lib/auth-client"
 
 const categories = [
   "Photo Studio",
@@ -52,13 +53,6 @@ const availableAmenities = [
   "Wheelchair Accessible",
 ]
 
-type AddStudioFormProps = {
-  user: {
-    name: string
-    email: string
-  }
-}
-
 type StudioFormData = {
   title: string
   category: string
@@ -83,10 +77,16 @@ const initialForm: StudioFormData = {
   overview: "",
 }
 
-export default function AddStudioForm({ user }: AddStudioFormProps) {
+export default function AddStudioForm() {
   const [formData, setFormData] = useState<StudioFormData>(initialForm)
   const [error, setError] = useState("")
   const [submitting, setSubmitting] = useState(false)
+
+  const router  = useRouter()
+  // const 
+
+  const { data: session } = authClient.useSession()
+  const user = session?.user
 
   const updateField = (field: keyof StudioFormData, value: string) => {
     setFormData((prev) => ({
@@ -171,11 +171,9 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
         hourlyRate,
         securityDeposit,
         maxCapacity,
-        // Display information only.
-        // Verify user identity on the server.
         owner: {
-          name: user.name,
-          email: user.email,
+          name: user?.name,
+          email: user?.email,
         },
       }
 
@@ -187,11 +185,10 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
 
       const data = await res.json()
       console.log(data)
-
-      toast.success("Studio add successfully")
-
+      
       if (data.acknowledged == true) {
-        redirect("/")
+        toast.success("Studio add successfully")
+        router.push('/studios')
       }
 
       // console.log("Studio form is valid:", payload);
@@ -468,7 +465,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
               <Label htmlFor="ownerName">Owner Name</Label>
               <Input
                 id="ownerName"
-                value={user.name}
+                value={user?.name}
                 readOnly
                 aria-readonly="true"
                 className="h-11 bg-muted"
@@ -480,7 +477,7 @@ export default function AddStudioForm({ user }: AddStudioFormProps) {
               <Input
                 id="ownerEmail"
                 type="email"
-                value={user.email}
+                value={user?.email}
                 readOnly
                 aria-readonly="true"
                 className="h-11 bg-muted"
