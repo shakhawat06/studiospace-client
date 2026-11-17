@@ -72,7 +72,7 @@ const UserDropdownNavbar = () => {
               </Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href="" className="flex items-center gap-2">
+              <Link href="/my-bookings" className="flex items-center gap-2">
                 <LuLayoutPanelTop />
                 My Bookings
               </Link>

@@ -4,7 +4,6 @@ import { Button } from "@base-ui/react"
 import { FiArrowUpRight, FiShield, FiCalendar } from "react-icons/fi"
 import { useState } from "react"
 import { authClient } from "@/lib/auth-client"
-import { POST } from "@/app/api/auth/[...all]/route"
 
 const BookingCard = ({ studio }) => {
   const [bookingDate, setBookingDate] = useState("")
