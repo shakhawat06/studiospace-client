@@ -5,7 +5,6 @@ import {
   FiClock,
   FiCheckCircle,
   FiArrowLeft,
-  FiHeart,
   FiCamera,
 } from "react-icons/fi"
 import Image from "next/image"
@@ -13,12 +12,16 @@ import EditStudio from "./EditStudio"
 import { Studio } from "@/app/types/type"
 import { DeleteStudioDialog } from "./DeleteStudioDialog"
 import BookingCard from "../booking/BookingCard"
+import AddToWishListButton from "./AddToWishListButton"
 
 type StudioDetailsProps = {
   studio: Studio
 }
 
 export default function StudioDetails({ studio }: StudioDetailsProps) {
+
+  
+
   const overview =
     studio.overview ||
     `Welcome to ${studio.title}, a creative space designed to bring your ideas to life. Whether you're planning a photography session, video production, or a creative project, this studio provides a comfortable and professional environment for your work.`
@@ -61,13 +64,7 @@ export default function StudioDetails({ studio }: StudioDetailsProps) {
             </div>
           </div>
 
-          <button
-            type="button"
-            className="inline-flex w-fit items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-medium transition hover:border-[#E47131] hover:text-[#E47131]"
-          >
-            <FiHeart />
-            Save Studio
-          </button>
+          <AddToWishListButton studio={studio} />          
         </div>
 
         {/* Image Gallery */}
@@ -104,13 +101,6 @@ export default function StudioDetails({ studio }: StudioDetailsProps) {
                 <p className="text-sm text-muted-foreground">Booking type</p>
                 <h3 className="mt-1 text-lg font-bold">Hourly</h3>
               </div>
-
-              {/* <div className="col-span-2 rounded-xl border bg-card p-4 sm:col-span-1">
-                <FiStar className="mb-3 text-2xl text-[#E47131]" />
-                <p className="text-sm text-muted-foreground">Guest rating</p>
-                <h3 className="mt-1 text-lg font-bold">
-                </h3>
-              </div> */}
             </section>
 
             {/* Overview */}

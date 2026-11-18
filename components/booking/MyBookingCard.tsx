@@ -146,7 +146,7 @@ const BookingCard = ({ booking }: { booking: Booking }) => {
                 variant="destructive"
                 className="cursor-pointer"
               >
-                Cancle Booking
+                Remove
                 <FiTrash2 />
               </Button>
               {/* <DeleteStudioDialog booking={booking} /> */}

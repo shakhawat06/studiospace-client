@@ -13,7 +13,7 @@ import { authClient } from "@/lib/auth-client"
 import { LogOutIcon } from "lucide-react"
 import Link from "next/link"
 import { redirect } from "next/navigation"
-import { LuCross, LuLayoutDashboard, LuLayoutPanelTop } from "react-icons/lu"
+import { LuCross, LuHeart, LuLayoutPanelTop } from "react-icons/lu"
 import { toast } from "react-toastify"
 
 const UserDropdownNavbar = () => {
@@ -62,12 +62,7 @@ const UserDropdownNavbar = () => {
               </div>
             </div>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link href="" className="flex items-center gap-2">
-                <LuLayoutDashboard />
-                Dashboard
-              </Link>
-            </DropdownMenuItem>
+            
             <DropdownMenuItem>
               <Link href="/add-studio" className="flex items-center gap-2">
                 <LuCross />
@@ -78,6 +73,12 @@ const UserDropdownNavbar = () => {
               <Link href="/my-bookings" className="flex items-center gap-2">
                 <LuLayoutPanelTop />
                 My Bookings
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/wishlist" className="flex items-center gap-2">
+                <LuHeart />
+                Wishlist
               </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
