@@ -1,5 +1,4 @@
 "use client"
-
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -16,7 +15,7 @@ import { authClient } from "@/lib/auth-client"
 const menuItems = [
   { label: "Home", href: "/" },
   { label: "Explore Studios", href: "/studios" },
-  { label: "How It Works", href: "/host" },
+  { label: "How It Works", href: "/how-it-works" },
   { label: "About Us", href: "/about" },
 ]
 

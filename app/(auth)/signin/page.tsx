@@ -37,6 +37,7 @@ export default function LoginForm() {
     })
 
     if (data) {
+      toast.success('Successfully Loggedin')
       redirect("/")
     }
     if (error) {

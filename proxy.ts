@@ -10,26 +10,13 @@ export async function proxy(request: NextRequest) {
 
   const user = session?.user
 
-  console.log(session);
-  
-
-  const protectedRoutes = [
-    "/dashboard",
-    "/add-studio",
-    "/my-bookings",
-  ]
-
-  const isProtectedRoute = protectedRoutes.some((route) =>
-    request.nextUrl.pathname.startsWith(route)
-  )
-
-  if (isProtectedRoute && !user) {
-    return NextResponse.redirect(new URL("/signin", request.url))
-  }
+  if(!user) {
+    return NextResponse.redirect(new URL('/signin', request.url))
+  }  
 
   return NextResponse.next()
 }
 
 export const config = {
-  matcher: ["/add-studio"],
+  matcher: ["/add-studio", "/my-bookings", "/studios/:path+"],
 }

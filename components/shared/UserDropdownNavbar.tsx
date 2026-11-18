@@ -12,14 +12,18 @@ import {
 import { authClient } from "@/lib/auth-client"
 import { LogOutIcon } from "lucide-react"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 import { LuCross, LuLayoutDashboard, LuLayoutPanelTop } from "react-icons/lu"
+import { toast } from "react-toastify"
 
 const UserDropdownNavbar = () => {
   const { data: session } = authClient.useSession()
   const user = session?.user
 
   const handleSignOut = () => {
+    toast.success('Logged Out!')
     authClient.signOut()
+    redirect('/signin')
   }
 
   return (
