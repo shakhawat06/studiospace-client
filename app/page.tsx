@@ -5,7 +5,7 @@ import { Studio } from "./types/type"
 import AllStudios from "@/components/studio/AllStudios"
 
 export default async function Page() {
-  const res = await fetch(`http://localhost:8000/studios`)
+  const res = await fetch(`http://localhost:8000/getStudios`)
   const datas: Studio[] = await res.json()
 
   return (
@@ -16,7 +16,7 @@ export default async function Page() {
         <div className="flex flex-col gap-4 text-sm leading-loose">
           {/* Featured Studios */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-            {datas.splice(0, 6).map((studio) => (
+            {datas.map((studio) => (
               <AllStudios key={studio._id} studio={studio} />
             ))}
           </div>

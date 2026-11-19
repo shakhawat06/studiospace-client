@@ -3,6 +3,8 @@ import type { Booking } from "@/app/types/type"
 import Link from "next/link"
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
+import { getTokenFromServer } from "@/lib/getTokenFromServer";
+import { notFound } from "next/navigation";
 
 const MyBookingsPage = async () => {
   const session = await auth.api.getSession({
@@ -10,14 +12,16 @@ const MyBookingsPage = async () => {
   })
 
   const user = session?.user
+
+  const token = await getTokenFromServer()
   
 
-  const res = await fetch(`http://localhost:8000/my-bookings/${user?.email}`)
+  const res = await fetch(`http://localhost:8000/my-bookings/${user?.email}`, {
+    headers: { authorization : `Bearer ${token}`}
+  })
   const bookings: Booking[] = await res.json()
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch bookings")
-  }
+  if (!res.ok) notFound()
 
   return (
     <main className="min-h-screen bg-background">

@@ -18,16 +18,19 @@ import { Button } from "@/components/ui/button"
 import { LuTrash2 } from "react-icons/lu"
 import { Studio } from "@/app/types/type"
 import { redirect } from "next/navigation"
+import { getTokenFromClient } from "@/lib/getToken"
 
 type StudioDetailsProps = {
   studio: Studio
 }
 
 export function DeleteStudioDialog({studio}: StudioDetailsProps) {
-
   const handleDeleteStudio = async () => {
+    const token = await getTokenFromClient()
+
     const res = await fetch(`http://localhost:8000/studio/${studio._id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: { authorization: `Bearer ${token}` }
     })
     const data = await res.json();
     console.log(data);

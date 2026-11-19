@@ -1,8 +1,9 @@
-import MyBookingCard from "@/components/booking/MyBookingCard"
 import type { Booking } from "@/app/types/type"
 import Link from "next/link"
 import { headers } from "next/headers"
 import { auth } from "@/lib/auth"
+import { getTokenFromServer } from "@/lib/getTokenFromServer"
+import MyWishlistCard from "@/components/wishlist/MyWishlistCard"
 
 const MyWishlistPage = async () => {
   const session = await auth.api.getSession({
@@ -11,7 +12,11 @@ const MyWishlistPage = async () => {
 
   const user = session?.user
 
-  const res = await fetch(`http://localhost:8000/wishlist/${user?.email}`)
+  const token = await getTokenFromServer()
+
+  const res = await fetch(`http://localhost:8000/wishlist/${user?.email}`, {
+    headers: { authorization: `Bearer ${token}`}
+  })
   const bookings: Booking[] = await res.json()
 
   if (!res.ok) {
@@ -44,7 +49,7 @@ const MyWishlistPage = async () => {
         {bookings.length > 0 ? (
           <div className="space-y-6">
             {bookings.map((booking) => (
-              <MyBookingCard key={booking._id} booking={booking} />
+              <MyWishlistCard key={booking._id} booking={booking} />
             ))}
           </div>
         ) : (

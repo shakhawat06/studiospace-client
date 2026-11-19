@@ -6,6 +6,7 @@ import { useState } from "react"
 import { authClient } from "@/lib/auth-client"
 import { Studio } from "@/app/types/type"
 import { toast } from "react-toastify"
+import { getTokenFromClient } from "@/lib/getToken"
 
 const BookingCard = ({ studio }: { studio: Studio}) => {
   const [bookingDate, setBookingDate] = useState("")
@@ -29,9 +30,11 @@ const BookingCard = ({ studio }: { studio: Studio}) => {
       bookingDate: today
     }
 
+    const token = await getTokenFromClient()
+
     const res = await fetch(`http://localhost:8000/booking`, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json', authorization: `Bearer ${token}`},
       body: JSON.stringify(data)
     })
     const bookingRes = await res.json()

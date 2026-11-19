@@ -25,6 +25,8 @@ import {
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
 import { authClient } from "@/lib/auth-client"
+import { getTokenFromClient } from "@/lib/getToken"
+
 
 const categories = [
   "Photo Studio",
@@ -177,16 +179,18 @@ export default function AddStudioForm() {
         },
       }
 
+      const token = await getTokenFromClient()
+
       const res = await fetch("http://localhost:8000/add-studio", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
         body: JSON.stringify(payload),
       })
 
-      const data = await res.json()
-      console.log(data)
+      const result = await res.json()
+      console.log(result)
       
-      if (data.acknowledged == true) {
+      if (result.acknowledged == true) {
         toast.success("Studio add successfully")
         router.push('/studios')
       }

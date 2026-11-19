@@ -36,6 +36,7 @@ import {
 import { toast } from "react-toastify"
 import { Studio } from "@/app/types/type"
 import { useRouter } from "next/navigation"
+import { getTokenFromClient } from "@/lib/getToken"
 
 const categories = [
   "Photo Studio",
@@ -184,9 +185,11 @@ const EditStudio = ({ studio }: StudioDetailsProps) => {
         maxCapacity,
       }
 
+      const token = await getTokenFromClient()
+
       const res = await fetch(`http://localhost:8000/studio/${studio._id}`, {
         method: "PATCH",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
         body: JSON.stringify(payload),
       })
 

@@ -14,15 +14,18 @@ import type { Booking } from "@/app/types/type"
 import { Button } from "@/components/ui/button"
 import { useRouter } from "next/navigation"
 import { toast } from "react-toastify"
+import { getTokenFromClient } from "@/lib/getToken"
 
 const BookingCard = ({ booking }: { booking: Booking }) => {
   const router = useRouter()
 
   const handleDeleteBooking = async () => {
+    const token = await getTokenFromClient()
     const res = await fetch(
       `http://localhost:8000/my-bookings/${booking._id}`,
       {
         method: "DELETE",
+        headers: { authorization: `Bearer ${token}`}
       }
     )
     const data = await res.json()

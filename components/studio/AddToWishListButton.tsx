@@ -1,6 +1,7 @@
 "use client"
 import { Studio } from "@/app/types/type"
 import { authClient } from "@/lib/auth-client"
+import { getTokenFromClient } from "@/lib/getToken"
 import { FiHeart } from "react-icons/fi"
 import { toast } from "react-toastify"
 
@@ -17,9 +18,10 @@ const AddToWishListButton = ({ studio }: { studio: Studio }) => {
     savingDate: today,
   }
   const handleWishList = async () => {
+    const token  = await getTokenFromClient()
     const res = await fetch(`http://localhost:8000/wishlist`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", authorization: `Bearer ${token}` },
       body: JSON.stringify(data),
     })
     const savedStudio = await res.json()

@@ -9,17 +9,16 @@ import Image from "next/image"
 const quickLinks = [
   { name: "Home", href: "/" },
   { name: "Explore Studios", href: "/studios" },
-  { name: "How It Works", href: "/#how-it-works" },
+  { name: "How It Works", href: "/how-it-works" },
   { name: "About Us", href: "/about" },
-  { name: "Contact Us", href: "/contact" },
 ]
 
 const studioCategories = [
-  { name: "Photo Studios", href: "/category/photo-studios" },
-  { name: "Sound Stages", href: "/category/sound-stages" },
-  { name: "Podcast Rooms", href: "/category/podcast-rooms" },
-  { name: "Music Suites", href: "/category/music-suites" },
-  { name: "Art Workshops", href: "/category/art-workshops" },
+  { name: "Photo Studios", href: "/studios" },
+  { name: "Sound Stages", href: "/studios" },
+  { name: "Podcast Rooms", href: "/studios" },
+  { name: "Music Suites", href: "/studios" },
+  { name: "Art Workshops", href: "/studios" },
 ]
 
 function XLogo() {
