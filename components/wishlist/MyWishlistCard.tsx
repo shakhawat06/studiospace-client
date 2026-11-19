@@ -22,7 +22,7 @@ const MyWishlistCard = ({ booking }: { booking: Booking }) => {
   const handleDeleteBooking = async () => {
     const token = await getTokenFromClient()
     const res = await fetch(
-      `http://localhost:8000/wishlist/${booking._id}`,
+      `${process.env.NEXT_PUBLIC_API_URL}/wishlist/${booking._id}`,
       {
         method: "DELETE",
         headers: { authorization: `Bearer ${token}`}

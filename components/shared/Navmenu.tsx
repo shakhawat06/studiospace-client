@@ -76,7 +76,7 @@ function Navmenu({
   }
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur-md supports-backdrop-filter:bg-background/60">
       <div className="mx-auto grid h-16 max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 sm:px-6 md:grid-cols-[1fr_auto_1fr]">
         {/* Logo */}
         <Link
@@ -146,7 +146,7 @@ function Navmenu({
           ) : (
             /* Profile Dropdown */
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
+              <DropdownMenuTrigger >
                 <Button variant="outline" className="gap-2 rounded-full">
                   <UserRound className="size-4" />
                   <span className="hidden max-w-28 truncate sm:inline">
@@ -160,28 +160,28 @@ function Navmenu({
                 <DropdownMenuLabel>{userName}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
 
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem >
                   <Link href="/dashboard">
                     <LayoutDashboard />
                     Dashboard
                   </Link>
                 </DropdownMenuItem>
 
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem >
                   <Link href="/dashboard/add-studio">
                     <PlusCircle />
                     Add New Studio
                   </Link>
                 </DropdownMenuItem>
 
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem >
                   <Link href="/dashboard/my-studios">
                     <Building2 />
                     My Studio Listings
                   </Link>
                 </DropdownMenuItem>
 
-                <DropdownMenuItem asChild>
+                <DropdownMenuItem >
                   <Link href="/dashboard/my-bookings">
                     <CalendarCheck />
                     My Bookings

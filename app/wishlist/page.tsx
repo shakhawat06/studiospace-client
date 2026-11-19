@@ -14,7 +14,7 @@ const MyWishlistPage = async () => {
 
   const token = await getTokenFromServer()
 
-  const res = await fetch(`http://localhost:8000/wishlist/${user?.email}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/wishlist/${user?.email}`, {
     headers: { authorization: `Bearer ${token}`}
   })
   const bookings: Booking[] = await res.json()
@@ -56,7 +56,7 @@ const MyWishlistPage = async () => {
           <div className="rounded-2xl border border-dashed py-16 text-center">
             <h2 className="text-xl font-semibold">No bookings yet</h2>
             <p className="mt-2 text-sm text-muted-foreground">
-              You haven`t booked any studios yet.
+              You haven`t save any studios yet.
             </p>
 
             <Link
