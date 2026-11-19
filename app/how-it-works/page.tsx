@@ -78,7 +78,7 @@ export default function HowItWorksPage() {
               <Button
                 className="h-12 bg-[#E47131] px-7 text-white hover:bg-[#cf642a]"
               >
-                <Link href="/studios">
+                <Link className="flex items-center" href="/studios">
                   Explore Studios
                   <ArrowRight className="ml-2 size-4" />
                 </Link>
@@ -242,9 +242,9 @@ export default function HowItWorksPage() {
             </ul>
 
             <Button
-              className="mt-9 bg-[#E47131] text-white hover:bg-[#cf642a]"
+              className="mt-9 h-12 bg-[#E47131] text-white hover:bg-[#cf642a]"
             >
-              <Link href="/studios">
+              <Link className="flex items-center px-2" href="/studios">
                 Browse Available Studios
                 <ArrowRight className="ml-2 size-4" />
               </Link>
@@ -317,7 +317,7 @@ export default function HowItWorksPage() {
             <Button
               className="mt-9 h-12 bg-[#E47131] px-8 text-white hover:bg-[#cf642a]"
             >
-              <Link href="/studios">
+              <Link className="flex items-center" href="/studios">
                 Find Your Studio
                 <ArrowRight className="ml-2 size-4" />
               </Link>
