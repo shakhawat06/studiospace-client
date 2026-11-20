@@ -195,7 +195,6 @@ export default function AddStudioForm() {
         router.push('/studios')
       }
 
-      // console.log("Studio form is valid:", payload);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.")
     } finally {

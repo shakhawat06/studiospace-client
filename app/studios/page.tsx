@@ -3,7 +3,9 @@ import { HiOutlineCamera } from "react-icons/hi2"
 import { Studio } from "../types/type"
 
 const StudiosPage = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/studios`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/studios`, {
+    cache: "no-store",
+  })
   const studios: Studio[] = await res.json()
 
   return (
