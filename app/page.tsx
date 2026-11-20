@@ -12,8 +12,6 @@ export default async function Page() {
     <>
       <HeroSlider />
 
-      <h2>Hello github</h2>
-
       <main className="mx-auto min-h-svh max-w-7xl p-6">
         <div className="flex flex-col gap-4 text-sm leading-loose">
           {/* Featured Studios */}
