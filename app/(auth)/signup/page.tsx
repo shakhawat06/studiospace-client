@@ -16,7 +16,7 @@ import {
   FieldSeparator,
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
-import { authClient, signIn } from "@/lib/auth-client"
+import { signIn, signUp } from "@/lib/auth-client"
 import Image from "next/image"
 import Link from "next/link"
 import { redirect } from "next/navigation"
@@ -34,10 +34,7 @@ export default function SignUpForm() {
       password: string
     }
 
-    console.log(user);
-    
-
-    const { data, error } = await authClient.signUp.email({
+    const { data, error } = await signUp.email({
       ...user,
     })
 
@@ -47,7 +44,7 @@ export default function SignUpForm() {
     }
     if (error) {
       toast.error('Something went wrong!')
-      console.log(error)
+      console.log(error);
     }
   }
 

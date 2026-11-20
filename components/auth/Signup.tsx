@@ -48,7 +48,7 @@ export default function SignupForm() {
   const [password, setPassword] = useState("")
 
   const [showPassword, setShowPassword] = useState(false)
-  const [submitted, setSubmitted] = useState(false)
+  const [submitted] = useState(false)
   const [touched, setTouched] = useState({
     name: false,
     email: false,
@@ -96,8 +96,6 @@ export default function SignupForm() {
 
     if (!isFormValid || submitted) return
 
-    // Connect your registration API/authentication here.
-    // Example: await authClient.signUp.email({...})
 
     console.log("Form is valid. Connect your registration API.")
   }

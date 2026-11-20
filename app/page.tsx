@@ -5,12 +5,14 @@ import { Studio } from "./types/type"
 import AllStudios from "@/components/studio/AllStudios"
 
 export default async function Page() {
-  const res = await fetch(`http://localhost:8000/getStudios`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/getStudios`)
   const datas: Studio[] = await res.json()
 
   return (
     <>
       <HeroSlider />
+
+      <h2>Hello github</h2>
 
       <main className="mx-auto min-h-svh max-w-7xl p-6">
         <div className="flex flex-col gap-4 text-sm leading-loose">

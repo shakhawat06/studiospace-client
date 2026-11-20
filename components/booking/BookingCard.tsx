@@ -32,7 +32,7 @@ const BookingCard = ({ studio }: { studio: Studio}) => {
 
     const token = await getTokenFromClient()
 
-    const res = await fetch(`http://localhost:8000/booking`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/booking`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json', authorization: `Bearer ${token}`},
       body: JSON.stringify(data)
